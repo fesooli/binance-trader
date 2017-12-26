@@ -6,6 +6,7 @@ import sys
 import time
 import config
 import argparse
+from ps_connection import PsConnection
 
 from BinanceAPI import *
 
@@ -151,6 +152,9 @@ def action(symbol):
     if ORDER_ID is 0:
 
         print 'price:%.8f buyp:%.8f sellp:%.8f-bid:%.8f ask:%.8f BTC:$%.1f' % (lastPrice, buyPrice, sellPrice, lastBid, lastAsk, btcPrice)
+
+        connection = PsConnection()
+        connection.insert_registry(lastPrice)
 
         # Did profit get caught
         if lastAsk >= profitablePrice:
